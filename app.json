@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "Five Stars Galway Taxis",
+    "slug": "myRideApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/download1.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/download1.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/download1.png",
+        "backgroundColor": "#000000"
+      },
+      "edgeToEdgeEnabled": true,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBb3LzTPrvPlTzPGXF2MSBlgHEzL5vzSNY"
+        }
+      },
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ],
+      "package": "com.ridaanjum.myRideApp"
+    },
+    "web": {
+      "favicon": "./assets/download1.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "08e14cc3-2aaa-4fef-b8f7-ac35e4afab2b"
+      }
+    },
+    "owner": "haimyyy_19"
+  }
+}
