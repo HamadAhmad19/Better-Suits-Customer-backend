@@ -1,0 +1,30 @@
+{
+    "name": "myrideapp-backend",
+    "version": "1.0.0",
+    "description": "Backend API server for myRideApp using MongoDB",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "nodemon server.js",
+        "ngrok": "node start-ngrok.js"
+    },
+    "keywords": [
+        "express",
+        "mongodb",
+        "mongoose",
+        "api"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "mongoose": "^8.0.0",
+        "multer": "^2.0.2",
+        "twilio": "^5.11.1"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}
