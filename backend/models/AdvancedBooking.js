@@ -45,7 +45,8 @@ const advancedBookingSchema = new mongoose.Schema({
         waitTime: String,
         luggage: Boolean,
         pet: Boolean,
-        couponCode: String
+        couponCode: String,
+        giftCardCode: String
     },
     scheduledTime: {
         type: Date,

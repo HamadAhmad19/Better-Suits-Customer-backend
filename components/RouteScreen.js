@@ -1279,6 +1279,8 @@ const RouteScreen = () => {
   const [luggage, setLuggage] = useState(false);
   const [pet, setPet] = useState(false);
   const [couponCode, setCouponCode] = useState("");
+  const [giftCardCode, setGiftCardCode] = useState("");
+  const [isModalGiftCardVisible, setIsModalGiftCardVisible] = useState(false);
   const [waitTimeDropdownVisible, setWaitTimeDropdownVisible] = useState(false);
   const [pickupScreenPosition, setPickupScreenPosition] = useState(null);
   const [dropoffScreenPosition, setDropoffScreenPosition] = useState(null);
@@ -1483,7 +1485,9 @@ const RouteScreen = () => {
                   waitTime: waitTime,
                   luggage: luggage,
                   pet: pet,
+                  pet: pet,
                   couponCode: couponCode,
+                  giftCardCode: giftCardCode,
                 },
                 paymentMethod: selectedPaymentMethod,
               });
@@ -1857,6 +1861,13 @@ const RouteScreen = () => {
           >
             <Text style={styles.preferenceText}>Coupon code</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.preferenceOption}
+            onPress={() => setIsModalGiftCardVisible(true)}
+          >
+            <Text style={styles.preferenceText}>Gift Card code</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Book Now Button */}
@@ -1921,6 +1932,114 @@ const RouteScreen = () => {
                 </TouchableOpacity>
               ))}
             </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Coupon Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={couponModalVisible}
+        onRequestClose={() => setCouponModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Enter coupon</Text>
+              <TouchableOpacity onPress={() => setCouponModalVisible(false)}>
+                <Feather name="x" size={22} color="#000" />
+              </TouchableOpacity>
+            </View>
+
+            <Text
+              style={{
+                textAlign: "center",
+                marginBottom: 15,
+                color: "#888",
+              }}
+            >
+              Insert your coupon code to be applied to prices
+            </Text>
+
+            <View style={styles.couponInputBox}>
+              <FontAwesome5
+                name="ticket-alt"
+                size={18}
+                color="#888"
+                style={{ marginRight: 8 }}
+              />
+              <TextInput
+                placeholder="Enter coupon code"
+                value={couponCode}
+                onChangeText={setCouponCode}
+                style={{ flex: 1 }}
+              />
+            </View>
+
+            <TouchableOpacity
+              style={styles.couponApplyButton}
+              onPress={() => setCouponModalVisible(false)}
+            >
+              <Text style={styles.couponApplyText}>Apply</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => setCouponModalVisible(false)}>
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "red",
+                  marginTop: 10,
+                  fontWeight: "500",
+                }}
+              >
+                Cancel
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Gift Card Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalGiftCardVisible}
+        onRequestClose={() => setIsModalGiftCardVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Enter Gift Card</Text>
+              <TouchableOpacity onPress={() => setIsModalGiftCardVisible(false)}>
+                <Feather name="x" size={22} color="#000" />
+              </TouchableOpacity>
+            </View>
+            <View style={{ padding: 20 }}>
+              <TextInput
+                style={{
+                  borderWidth: 1,
+                  borderColor: "#ddd",
+                  borderRadius: 8,
+                  padding: 12,
+                  marginBottom: 15,
+                }}
+                placeholder="Enter gift card code"
+                value={giftCardCode}
+                onChangeText={setGiftCardCode}
+              />
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "#0254E8",
+                  padding: 15,
+                  borderRadius: 10,
+                  alignItems: "center",
+                }}
+                onPress={() => setIsModalGiftCardVisible(false)}
+              >
+                <Text style={{ color: "white", fontWeight: "bold" }}>Apply</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>

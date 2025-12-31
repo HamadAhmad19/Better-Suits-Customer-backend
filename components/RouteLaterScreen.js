@@ -44,6 +44,8 @@ const RouteLaterScreen = () => {
   const [luggage, setLuggage] = useState(false);
   const [pet, setPet] = useState(false);
   const [couponCode, setCouponCode] = useState('');
+  const [giftCardCode, setGiftCardCode] = useState('');
+  const [isModalGiftCardVisible, setIsModalGiftCardVisible] = useState(false);
   const [waitTimeDropdownVisible, setWaitTimeDropdownVisible] = useState(false);
   const [pickupScreenPosition, setPickupScreenPosition] = useState(null);
   const [dropoffScreenPosition, setDropoffScreenPosition] = useState(null);
@@ -225,34 +227,6 @@ const RouteLaterScreen = () => {
     }
   };
 
-  // const handleBookNow_OLD = () => {
-  //   Alert.alert(
-  //     'Confirm Ride',
-  //     `Book ${selectedRide} ride for â‚¬${prices[selectedRide]}?\n\nScheduled for: ${formatDateTimeDisplay()}`,
-  //     [
-  //       { text: 'Cancel', style: 'cancel' },
-  //       { 
-  //         text: 'Confirm', 
-  //         onPress: () => {
-  //           navigation.navigate('ConfirmRideLater', {
-  //             pickup: pickup,
-  //             dropoff: dropoff,
-  //             selectedRide: selectedRide,
-  //             phoneNumber: phoneNumber,
-  //             price: prices[selectedRide],
-  //             estimatedTime: estimatedTime,
-  //             estimatedDistance: estimatedDistance,
-  //             scheduledTime: scheduledTime,
-  //             selectedDate: selectedDate,
-  //             selectedTime: selectedTime
-  //           })
-  //         }
-  //       }
-  //     ]
-  //   );
-  // };
-
-
   const handleBookNow = () => {
     if (!selectedPaymentMethod || selectedPaymentMethod === 'Select payment method') {
       Alert.alert('Payment Method Required', 'Please select a payment method before booking.');
@@ -282,7 +256,8 @@ const RouteLaterScreen = () => {
                   waitTime: waitTime,
                   luggage: luggage,
                   pet: pet,
-                  couponCode: couponCode
+                  couponCode: couponCode,
+                  giftCardCode: giftCardCode
                 },
                 // Add legacy fields if needed by backend, though model uses scheduledTime
                 selectedDate: selectedDate,
@@ -661,6 +636,13 @@ const RouteLaterScreen = () => {
           >
             <Text style={styles.preferenceText}>Coupon code</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.preferenceOption}
+            onPress={() => setIsModalGiftCardVisible(true)}
+          >
+            <Text style={styles.preferenceText}>Gift Card code</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Scheduled Time */}
@@ -734,6 +716,50 @@ const RouteLaterScreen = () => {
                 </TouchableOpacity>
               ))}
             </ScrollView>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Gift Card Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalGiftCardVisible}
+        onRequestClose={() => setIsModalGiftCardVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Enter Gift Card</Text>
+              <TouchableOpacity onPress={() => setIsModalGiftCardVisible(false)}>
+                <Feather name="x" size={22} color="#000" />
+              </TouchableOpacity>
+            </View>
+            <View style={{ padding: 20 }}>
+              <TextInput
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#ddd',
+                  borderRadius: 8,
+                  padding: 12,
+                  marginBottom: 15,
+                }}
+                placeholder="Enter gift card code"
+                value={giftCardCode}
+                onChangeText={setGiftCardCode}
+              />
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#0254E8',
+                  padding: 15,
+                  borderRadius: 10,
+                  alignItems: 'center',
+                }}
+                onPress={() => setIsModalGiftCardVisible(false)}
+              >
+                <Text style={{ color: 'white', fontWeight: 'bold' }}>Apply</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>

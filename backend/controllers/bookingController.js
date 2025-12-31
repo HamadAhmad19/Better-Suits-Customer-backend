@@ -221,3 +221,44 @@ exports.deleteAdvancedBooking = async (req, res) => {
       .json({ success: false, message: "Failed to delete advanced booking" });
   }
 };
+
+// Update booking preferences (wait time, coupon code, gift card code)
+exports.updateBookingPreferences = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { preferences } = req.body;
+
+    if (!preferences) {
+      return res.status(400).json({
+        success: false,
+        message: "Preferences object is required",
+      });
+    }
+
+    const updatedBooking = await RideBooking.findByIdAndUpdate(
+      id,
+      { preferences: preferences },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedBooking) {
+      return res.status(404).json({
+        success: false,
+        message: "Booking not found",
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Preferences updated successfully",
+      booking: updatedBooking,
+    });
+  } catch (error) {
+    console.error("Error updating booking preferences:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to update preferences",
+      error: error.message,
+    });
+  }
+};

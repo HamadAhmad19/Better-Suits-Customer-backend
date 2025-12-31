@@ -47,6 +47,7 @@ const rideBookingSchema = new mongoose.Schema(
       luggage: Boolean,
       pet: Boolean,
       couponCode: String,
+      giftCardCode: String,
     },
     status: {
       type: String,

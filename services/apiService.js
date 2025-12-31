@@ -28,8 +28,7 @@ console.log("🚀 API baseURL configured:", api.defaults.baseURL);
 api.interceptors.request.use(
   (config) => {
     console.log(
-      `📤 API Request: ${config.method?.toUpperCase()} ${config.baseURL}${
-        config.url
+      `📤 API Request: ${config.method?.toUpperCase()} ${config.baseURL}${config.url
       }`
     );
     return config;
@@ -347,6 +346,21 @@ export const updateUserProfile = async (phoneNumber, profileData) => {
     return response.data.user;
   } catch (error) {
     console.error("Error updating user profile:", error);
+    throw error;
+  }
+};
+
+// Update booking preferences (wait time, coupon code, gift card code)
+export const updateBookingPreferences = async (bookingId, preferences) => {
+  try {
+    console.log(`📝 Updating booking ${bookingId} preferences:`, preferences);
+    const response = await api.put(`/api/bookings/${bookingId}/preferences`, {
+      preferences,
+    });
+    console.log("✅ Preferences updated successfully:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error updating booking preferences:", error);
     throw error;
   }
 };
