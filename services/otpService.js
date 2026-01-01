@@ -18,7 +18,14 @@ export const sendOtp = async (phoneNumber) => {
     } catch (error) {
         console.error('Error sending OTP:', error);
 
-        const errorMessage = error.response?.data?.message || 'Failed to send OTP. Please try again.';
+        let errorMessage = error.response?.data?.message;
+        if (!errorMessage) {
+            if (error.message === 'Network Error' || error.code === 'ERR_NETWORK') {
+                errorMessage = `Network Error. Check Wi-Fi. URL: ${api.defaults.baseURL}`;
+            } else {
+                errorMessage = error.message || 'Failed to send OTP. Please try again.';
+            }
+        }
 
         return {
             success: false,
