@@ -16,6 +16,7 @@
       "supportsTablet": true
     },
     "android": {
+      "usesCleartextTraffic": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/download1.png",
         "backgroundColor": "#000000"
@@ -37,7 +38,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "08e14cc3-2aaa-4fef-b8f7-ac35e4afab2b"
+        "projectId": "6d5ef451-7a83-4a66-9ff6-38502e72e6ff"
       }
     },
     "owner": "haimyyy_19"
